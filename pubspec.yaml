@@ -10,8 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  ionicons: ^0.1.2
 
   cupertino_icons: ^1.0.2
+  flutter_facebook_login: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,6 +28,21 @@ flutter:
   assets:
     - images/face.png
     - images/mess.png
+    - images/user1.jpg
+    - images/user2.jpg
+    - images/user3.jpg
+    - images/user4.jpg
+    - images/user5.jpg
+    - images/user6.jpg
+    - images/user7.jpg
+    - images/user8.jpg
+    - images/user9.jpg
+    - images/user10.jpg
+    - images/user11.jpg
+    - images/user12.jpg
+    - images/user13.jpg
+    - images/avt.jpg
+    - images/gmail1.png
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

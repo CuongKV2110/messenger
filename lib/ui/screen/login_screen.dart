@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:messenger/bloc/login_bloc.dart';
 
 import 'home_screen.dart';
@@ -11,6 +12,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  static final FacebookLogin facebookSignIn = new FacebookLogin();
   final LoginBloc _loginBloc = LoginBloc();
   TextEditingController userController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -20,14 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+          padding: const EdgeInsets.fromLTRB(20, 2, 20, 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.5,
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.16,
                   child: Image.asset('images/mess.png'),
                 ),
                 const SizedBox(height: 20),
@@ -38,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontSize: 30,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 _loginForm()
               ],
             ),
@@ -78,7 +80,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: "Password",
                 ),
               );
-
             },
           ),
         ),
@@ -111,7 +112,56 @@ class _LoginScreenState extends State<LoginScreen> {
         const Text(
             "----------------------------------- or -----------------------------------"),
         const SizedBox(
-          height: 16,
+          height: 10,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              GestureDetector(
+                child: const CircleAvatar(
+                  backgroundImage: AssetImage('images/face.png'),
+                ),
+                onTap: () async {
+                  // facebookSignIn.loginBehavior = FacebookLoginBehavior.webViewOnly;
+                  final FacebookLoginResult result =
+                      await facebookSignIn.logIn(['email']);
+                  switch (result.status) {
+                    case FacebookLoginStatus.loggedIn:
+                      final FacebookAccessToken accessToken =
+                          result.accessToken;
+                      print('''
+                      Logged in!
+                      Token: ${accessToken.token}
+                      User id: ${accessToken.userId}
+                      Expires: ${accessToken.expires}
+                      Permissions: ${accessToken.permissions}
+                      Declined permissions: ${accessToken.declinedPermissions}
+                      ''');
+                      break;
+                    case FacebookLoginStatus.cancelledByUser:
+                      print('Login cancelled by the user.');
+                      break;
+                    case FacebookLoginStatus.error:
+                      print('Something went wrong with the login process.\n'
+                          'Here\'s the error Facebook gave us: ${result.errorMessage}');
+                      break;
+                  }
+                },
+              ),
+              GestureDetector(
+                child: const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  backgroundImage: AssetImage('images/gmail1.png'),
+                ),
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 12,
         ),
         MaterialButton(
           height: 46,

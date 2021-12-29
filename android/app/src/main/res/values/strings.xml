@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">my_messenger_demo</string>
+    <string name="facebook_app_id">1282750388909258</string>
+    <string name="fb_login_protocol_scheme">fb1282750388909258</string>
+</resources>

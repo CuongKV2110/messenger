@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:messenger/ui/screen/mess_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -56,16 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildChatScreen() {
-    return Padding(
-      padding: EdgeInsets.all(10),
-      child: ListView(
-        children: [
-          Text("aaaaa"),
-          Text("aaaaa"),
-          Text("aaaaa"),
-        ],
-      ),
-    );
+    return MessScreen();
   }
 
   Widget _buildStoryScreen() {

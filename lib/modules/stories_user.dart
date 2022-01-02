@@ -2,5 +2,5 @@ class StoriesUser{
     String url;
     String name;
 
-    StoriesUser(this.url, this.name);
+    StoriesUser({required this.url,required this.name});
 }

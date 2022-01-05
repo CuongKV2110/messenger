@@ -13,14 +13,18 @@ dependencies:
   ionicons: ^0.1.2
 
   cupertino_icons: ^1.0.2
-  flutter_facebook_login: ^3.0.0
+#  flutter_facebook_login: ^3.0.0
   equatable: ^2.0.3
   dio: ^4.0.4
   flutter_bloc: 7.3.0
-  json_serializable: ^3.3.0
+  json_serializable: ^6.0.0
   fluttertoast: 8.0.7
+  http: ^0.13.4
+  json_annotation: ^4.3.0
 
 dev_dependencies:
+  analyzer: ^2.7.0
+  build_runner: any
   flutter_test:
     sdk: flutter
 

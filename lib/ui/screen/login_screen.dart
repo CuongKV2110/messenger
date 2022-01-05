@@ -5,8 +5,9 @@ import 'package:messenger/bloc/login/login_bloc.dart';
 import 'package:messenger/bloc/login/login_event.dart';
 import 'package:messenger/bloc/login/login_state.dart';
 import 'package:messenger/helpers/ui_helper.dart';
-import 'package:messenger/ui/screen/mess_screen.dart';
 
+
+import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -29,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
           print(state);
           if (state is LoginProcessing) {
             UiHelper.showLoading(context);
+
           }
           if (state is LoginError) {
             UiHelper.hideLoading(context);
@@ -36,10 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
           }
 
           if (state is LoginSuccess) {
+            UiHelper.hideLoading(context);
             Navigator.of(context).pushReplacement(
               CupertinoPageRoute(
                 builder: (context) {
-                  return MessScreen();
+                  return HomeScreen();
                 },
               ),
             );

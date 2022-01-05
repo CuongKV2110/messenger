@@ -1,12 +1,16 @@
-abstract class LoginEvent{}
+abstract class LoginEvent {
+  LoginEvent([List props = const []]);
 
-class LoginNormal extends LoginEvent{
- final String email;
- final String password;
-
- LoginNormal(this.email, this.password);
+  List<Object> get props => [props];
 }
 
-class LoginFacebook extends LoginEvent{}
+class LoginNormal extends LoginEvent {
+  final String email;
+  final String password;
 
-class LoginGoogle extends LoginEvent{}
+  LoginNormal(this.email, this.password);
+}
+
+class LoginFacebook extends LoginEvent {}
+
+class LoginGoogle extends LoginEvent {}

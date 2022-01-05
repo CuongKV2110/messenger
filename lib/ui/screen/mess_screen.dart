@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger/modules/stories_user.dart';
+import 'package:messenger/models/stories.dart';
 
 class MessScreen extends StatefulWidget {
   const MessScreen({Key? key}) : super(key: key);
@@ -10,7 +10,7 @@ class MessScreen extends StatefulWidget {
 }
 
 class _MessScreenState extends State<MessScreen> {
-  List<StoriesUser> listStory = [];
+  List<Stories> listStory = [];
 
   @override
   void initState() {
@@ -18,13 +18,7 @@ class _MessScreenState extends State<MessScreen> {
   }
 
   initData() {
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user1.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user2.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user3.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user4.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user5.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user6.jpg'));
-    listStory.add(StoriesUser(name: 'Linh', url: 'images/user7.jpg'));
+    listStory.add(Stories(name: 'Linh', url: 'images/user1.jpg'));
   }
 
   @override

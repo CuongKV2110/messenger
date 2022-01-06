@@ -5,6 +5,8 @@ abstract class AppEvent {}
 
 class GetUser extends AppEvent {}
 
+class GetStory extends AppEvent {}
+
 class ChatView extends AppEvent {}
 
 class FriendView extends AppEvent {}

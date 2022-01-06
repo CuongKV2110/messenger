@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:messenger/models/response/user_response.dart';
-class UserProvider {
+import 'package:messenger/models/response/story_response.dart';
+class StoryProvider {
   late Dio _dio;
-  UserProvider() {
+  StoryProvider() {
     _dio = Dio()
       ..interceptors
           .add(LogInterceptor(requestBody: true, responseBody: true));
@@ -15,10 +15,10 @@ class UserProvider {
       return client;
     };
   }
-  Future<UserResponse> getData() async {
+  Future<StoryResponse> getData() async {
     Response response = await _dio.get(
-      "https://61951e9274c1bd00176c6b93.mockapi.io/api/v1/user",
+      "https://61951e9274c1bd00176c6b93.mockapi.io/api/v1/story",
     );
-    return UserResponse.fromJson(response.data ?? "");
+    return StoryResponse.fromJson(response.data ?? "");
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger/models/stories.dart';
+import 'package:messenger/models/story.dart';
 
 class MessScreen extends StatefulWidget {
   const MessScreen({Key? key}) : super(key: key);
@@ -10,16 +10,6 @@ class MessScreen extends StatefulWidget {
 }
 
 class _MessScreenState extends State<MessScreen> {
-  List<Stories> listStory = [];
-
-  @override
-  void initState() {
-    initData();
-  }
-
-  initData() {
-    listStory.add(Stories(name: 'Linh', url: 'images/user1.jpg'));
-  }
 
   @override
   Widget build(BuildContext context) {

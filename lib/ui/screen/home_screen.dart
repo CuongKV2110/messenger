@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:messenger/bloc/app/app_bloc.dart';
 import 'package:messenger/bloc/app/app_event.dart';
 import 'package:messenger/bloc/app/app_state.dart';
-import 'package:messenger/models/stories.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _appBloc.add(GetUser());
+    _appBloc.add(GetStory());
   }
 
   @override
@@ -95,13 +94,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildBody() {
     if (_selectedIndex == 0) {
-      // return ListView.builder(
-      //   itemCount: _appBloc.users.length,
-      //   itemBuilder: (context, index) {
-      //     return Text(_appBloc.users[index].name);
-      //   },
-      // );
-
       return CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -137,10 +129,138 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.94,
+                  height: 80,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                              width: 64,
+                              height: 64,
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    width: 62,
+                                    height: 62,
+                                    decoration: const BoxDecoration(
+                                      color: Colors.grey,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2),
+                                      child: Container(
+                                        width: 60,
+                                        height: 60,
+                                        decoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 36,
+                                    left: 10,
+                                    child: Container(
+                                      width: 16,
+                                      height: 16,
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(
+                                            Icons.photo_camera_front),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            const Text("Tạo Story")
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 14,
+                        ),
+                        ListView.builder(
+                          itemCount: _appBloc.stories.length,
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 14),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 64,
+                                    height: 64,
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          width: 62,
+                                          height: 62,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.blue)),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(2),
+                                            child: Container(
+                                              width: 60,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  image: NetworkImage(_appBloc
+                                                      .stories[index].avt),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 2,
+                                          left: 42,
+                                          child: Container(
+                                            width: 16,
+                                            height: 16,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  width: 2,
+                                                  color: Colors.white),
+                                              color: Colors.green,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(_appBloc.stories[index].name)
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }, childCount: 1),
+          ),
+          SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (context, index) {
+              (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, bottom: 12),
+                  padding:
+                      const EdgeInsets.only(left: 10, right: 10, bottom: 12),
                   child: Row(
                     children: [
                       Container(
@@ -191,9 +311,68 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       );
     } else if (_selectedIndex == 1) {
-      return Text("Friends");
+      return ListView.builder(
+        itemCount: _appBloc.stories.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.fromLTRB(12, 12, 12, 2),
+            child: Row(
+              children: [
+                Container(
+                  width: 64,
+                  height: 64,
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: NetworkImage(_appBloc.stories[index].avt),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 2,
+                        left: 42,
+                        child: Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.white),
+                            color: Colors.green,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 6,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(_appBloc.stories[index].fullname, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                    SizedBox(height: 4,),
+                    Text(_appBloc.stories[index].time)
+                  ],
+                )
+              ],
+            ),
+          );
+        },
+      );
     } else {
-      return Text("Stories");
+      return ListView.builder(
+        itemCount: _appBloc.stories.length,
+        itemBuilder: (context, index) {
+          return Text(_appBloc.stories[index].name);
+        },
+      );
     }
   }
 }

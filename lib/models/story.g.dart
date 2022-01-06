@@ -1,23 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'story.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+Story _$StoryFromJson(Map<String, dynamic> json) => Story(
       json['id'] as int,
       json['avt'] as String,
       json['name'] as String,
-      json['chat'] as String,
+      json['fullname'] as String,
+      json['str'] as String,
+      json['music'] as String,
       json['time'] as String,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$StoryToJson(Story instance) => <String, dynamic>{
       'id': instance.id,
       'avt': instance.avt,
       'name': instance.name,
-      'chat': instance.chat,
-      'time': instance.time,
+      'str': instance.str,
+      'music': instance.music,
     };

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:messenger/models/response/login_response.dart';
+import 'package:messenger/models/response/user_response.dart';
 class UserProvider {
   late Dio _dio;
   UserProvider() {
@@ -15,10 +16,10 @@ class UserProvider {
       return client;
     };
   }
-  Future<LoginResponse> getData() async {
+  Future<UserResponse> getData() async {
     Response response = await _dio.get(
       "https://61951e9274c1bd00176c6b93.mockapi.io/api/v1/user",
     );
-    return LoginResponse.fromJson(response.data ?? "");
+    return UserResponse.fromJson(response.data ?? "");
   }
 }

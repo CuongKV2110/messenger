@@ -3,16 +3,12 @@ import 'package:flutter/cupertino.dart';
 @immutable
 abstract class AppState {}
 
-class MessInitial extends AppState {}
+class HomeInitial extends AppState {}
 
-class MessProcessing extends AppState {}
+class HomeProcessing extends AppState {}
 
-class MessSuccess extends AppState {}
+class HomeSuccess extends AppState {}
 
-class MessError extends AppState {}
+class HomeError extends AppState {}
 
-class InfoSuccess extends AppState {}
 
-class StorySuccess extends AppState {}
-
-class FriendSuccess extends AppState {}

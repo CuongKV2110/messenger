@@ -7,7 +7,9 @@ part of 'user_response.dart';
 // **************************************************************************
 
 UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
-      Account.fromJson(json['data'] as Map<String, dynamic>),
+      (json['data'] as List<dynamic>)
+          .map((e) => User.fromJson(e as Map<String, dynamic>))
+          .toList(),
       json['success'] as bool,
     );
 

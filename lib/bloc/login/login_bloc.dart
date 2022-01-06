@@ -1,14 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:messenger/bloc/login/login_state.dart';
 import 'package:messenger/helpers/validate_helper.dart';
-import 'package:messenger/models/account.dart';
 import 'package:messenger/providers/login_provider.dart';
 
 import 'login_event.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginProvider _loginProvider = LoginProvider();
-  List<Account> account = [];
 
   LoginBloc() : super(LoginInitial());
   String errorMessage = '';

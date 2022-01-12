@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -47,15 +47,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     String title = 'Chats';
-    if(_selectedIndex == 0) {
+    if (_selectedIndex == 0) {
       title = 'Chats';
     }
 
-    if(_selectedIndex == 1) {
+    if (_selectedIndex == 1) {
       title = 'Bạn bè';
     }
 
-    if(_selectedIndex == 2) {
+    if (_selectedIndex == 2) {
       title = 'Tin';
     }
 
@@ -86,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(12),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(AppBloc.singleton.account.avatarUrl),
+                backgroundImage:
+                    NetworkImage(AppBloc.singleton.account.avatarUrl),
               ),
             ),
           ),
@@ -145,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
         return Padding(
-          padding: const EdgeInsets.fromLTRB(14,10,14,8),
+          padding: const EdgeInsets.fromLTRB(14, 10, 14, 8),
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.94,
             height: 80,
@@ -209,7 +210,26 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView.builder(
       itemCount: _homeBloc.stories.length,
       itemBuilder: (context, index) {
-        return Text(_homeBloc.stories[index].name);
+        return CachedNetworkImage(
+          height: 100,
+          width: 100,
+          imageUrl: _homeBloc.stories[index].avt,
+          placeholder: (context, url) {
+            return Container(
+              color: Colors.black,
+            );
+          },
+          errorWidget: (context, url, error) {
+            return Container(
+              color: Colors.black,
+              child: const Icon(
+                Icons.error,
+                color: Colors.red,
+              ),
+            );
+          },
+        );
+        // return Text(_homeBloc.stories[index].name);
       },
     );
   }

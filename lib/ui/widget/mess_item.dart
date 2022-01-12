@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/models/user.dart';
 
@@ -12,7 +13,7 @@ class MessItem extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 5, 14, 12),
       child: Row(
         children: [
-          Container(
+          /*Container(
             width: 60,
             height: 60,
             decoration: BoxDecoration(
@@ -22,6 +23,34 @@ class MessItem extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
+          ),*/
+          CachedNetworkImage(
+            imageUrl: user.avt,
+            imageBuilder: (context, imageProvider) => Container(
+              width: 62,
+              height: 62,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            placeholder: (context, url) {
+              return  Container(
+                color:Colors.black,
+              );
+            },
+            errorWidget: (context, url, error) {
+              return Container(
+                color: Colors.black,
+                child: const Icon(
+                  Icons.error,
+                  color: Colors.red,
+                ),
+              );
+            },
           ),
           const SizedBox(
             width: 12,

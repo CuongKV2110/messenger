@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/models/story.dart';
 
@@ -21,24 +22,40 @@ class StoriesItem extends StatelessWidget {
                   width: 62,
                   height: 62,
                   decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 2, color: Colors.blue)),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 2,
+                      color: Colors.blue,
+                    ),
+                  ),
                   child: Padding(
                     padding: const EdgeInsets.all(2),
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: NetworkImage(story.avt),
-                          fit: BoxFit.cover,
+                    child: CachedNetworkImage(
+                      imageUrl: story.avt,
+                      imageBuilder: (context, imageProvider) => Container(
+                        width: 62,
+                        height: 62,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
+                      errorWidget: (context, url, error) {
+                        return Container(
+                          color: Colors.black,
+                          child: const Icon(
+                            Icons.error,
+                            color: Colors.red,
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ),
-                Positioned(
+                story.status == 'online' ? Positioned(
                   bottom: 2,
                   left: 42,
                   child: Container(
@@ -50,7 +67,7 @@ class StoriesItem extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                )
+                ) : const SizedBox()
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/helpers/date_helper.dart';
 import 'package:messenger/models/story.dart';
@@ -18,16 +19,31 @@ class FriendItem extends StatelessWidget {
             height: 64,
             child: Stack(
               children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: NetworkImage(story.avt),
-                      fit: BoxFit.cover,
+                CachedNetworkImage(
+                  imageUrl: story.avt,
+                  imageBuilder: (context, imageProvider) => Container(
+                    width: 62,
+                    height: 62,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: imageProvider,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+                  placeholder: (context, url) {
+                    return const CircularProgressIndicator();
+                  },
+                  errorWidget: (context, url, error) {
+                    return Container(
+                      color: Colors.black,
+                      child: const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      ),
+                    );
+                  },
                 ),
                 story.status == 'online'
                     ? Positioned(

@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class UiHelper {
-  static final Toast lengthShort = Toast.LENGTH_SHORT;
-  static final Toast lengthLong = Toast.LENGTH_LONG;
+  // static final Toast lengthShort = Toast.LENGTH_SHORT;
+  // static final Toast lengthLong = Toast.LENGTH_LONG;
   static bool isModalShowing = false;
 
   static showLoading(BuildContext context) {
@@ -13,7 +11,7 @@ class UiHelper {
       context: context,
       barrierColor: CupertinoColors.black.withOpacity(0.1),
       barrierDismissible: false,
-      transitionDuration: Duration(milliseconds: 200),
+      transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
         return WillPopScope(
           onWillPop: () async => false,
@@ -26,8 +24,8 @@ class UiHelper {
               width: 70,
               height: 70,
               child: Container(
-                padding: EdgeInsets.all(8),
-                child: CupertinoActivityIndicator(
+                padding: const EdgeInsets.all(8),
+                child: const CupertinoActivityIndicator(
                   radius: 12,
                 )
               ),
@@ -62,7 +60,7 @@ class UiHelper {
               CupertinoDialogAction(
                 isDefaultAction: true,
                 isDestructiveAction: true,
-                child: Text("Close"),
+                child: const Text("Close"),
                 onPressed: () {
                   Navigator.pop(context);
                   isModalShowing = false;
@@ -75,15 +73,15 @@ class UiHelper {
     );
   }
 
-  static showToast(String msg, Toast toastType) {
-    Fluttertoast.showToast(
-      msg: msg,
-      toastLength: toastType,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.black,
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
+  // static showToast(String msg, Toast toastType) {
+  //   Fluttertoast.showToast(
+  //     msg: msg,
+  //     toastLength: toastType,
+  //     gravity: ToastGravity.BOTTOM,
+  //     backgroundColor: Colors.black,
+  //     textColor: Colors.white,
+  //     fontSize: 16.0,
+  //   );
+  // }
 
 }

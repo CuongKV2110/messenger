@@ -11,11 +11,15 @@ StoryResponse _$StoryResponseFromJson(Map<String, dynamic> json) =>
       (json['data'] as List<dynamic>)
           .map((e) => Story.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['success'] as bool,
-    );
+    )
+      ..success = json['success'] as bool
+      ..errorCode = json['errorCode'] as String
+      ..errorMessage = json['errorMessage'] as String;
 
 Map<String, dynamic> _$StoryResponseToJson(StoryResponse instance) =>
     <String, dynamic>{
-      'data': instance.data,
       'success': instance.success,
+      'errorCode': instance.errorCode,
+      'errorMessage': instance.errorMessage,
+      'data': instance.data,
     };

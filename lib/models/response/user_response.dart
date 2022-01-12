@@ -7,9 +7,8 @@ part 'user_response.g.dart';
 @JsonSerializable()
 class UserResponse extends ApiResponse {
   final List<User> data;
-  final bool success;
 
-  UserResponse(this.data, this.success) : super(success: success);
+  UserResponse(this.data);
 
   factory UserResponse.fromJson(Map<String, dynamic> json) =>
       _$UserResponseFromJson(json);

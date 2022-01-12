@@ -15,7 +15,8 @@ class LoginProvider {
       return client;
     };
   }
-  Future<LoginResponse> getData() async {
+
+  Future<LoginResponse> login() async {
     Response response = await _dio.get(
       "https://61951e9274c1bd00176c6b93.mockapi.io/api/v1/login",
     );

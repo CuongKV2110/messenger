@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:messenger/bloc/app/app_bloc.dart';
 import 'package:messenger/bloc/login/login_state.dart';
 import 'package:messenger/helpers/validate_helper.dart';
 import 'package:messenger/providers/login_provider.dart';
@@ -26,35 +27,33 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield LoginError();
         return;
       }
+
       if (!ValidationHelper.isEmailValid(event.email)) {
         errorMessage = 'Email khong hop le';
         yield LoginError();
         return;
       }
+
       if (event.password.isEmpty) {
         errorMessage = 'Vui long nhap Pass';
         yield LoginError();
         return;
       }
+
       if (event.password.length < 6) {
         errorMessage = 'Pass phai tu 6 ki tu tro len';
         yield LoginError();
         return;
       }
+
       if (ValidationHelper.isEmailValid(event.email) &&
           event.password.length >= 6) {
-        print("User dung");
-        errorMessage = '';
-        yield LoginProcessing();
-
         await Future.delayed(const Duration(milliseconds: 1500), () {});
-        var res = await _loginProvider.getData();
-        print(res);
+        var res = await _loginProvider.login();
 
         if (res.success){
           if(res.data.email == event.email && res.data.password == event.password){
-            print("Tai Khoan Dung");
-            errorMessage = '';
+            AppBloc.singleton.account = res.data;
             yield LoginSuccess();
             return;
           }
@@ -63,6 +62,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             yield LoginError();
             return;
           }
+        }
+        else{
+          errorMessage = 'Dang nhap that bai !!!';
+          yield LoginError();
+          return;
         }
       }
 

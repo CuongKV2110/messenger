@@ -1,7 +1,5 @@
 abstract class ApiResponse {
-  bool success;
-
-  ApiResponse({
-    required this.success,
-  });
+  late bool success;
+  late String errorCode;
+  late String errorMessage;
 }

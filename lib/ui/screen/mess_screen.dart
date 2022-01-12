@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger/models/story.dart';
+import 'package:ionicons/ionicons.dart';
 
 class MessScreen extends StatefulWidget {
   const MessScreen({Key? key}) : super(key: key);
@@ -10,222 +10,81 @@ class MessScreen extends StatefulWidget {
 }
 
 class _MessScreenState extends State<MessScreen> {
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("AAA"),
-    );
-  }
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 30,
+        backgroundColor: Colors.white,
+        title:
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
 
-  /*
-  CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          // stretch: true,
-          automaticallyImplyLeading: false,
-          pinned: false,
-          expandedHeight: 60,
-          // collapsedHeight: 60,
-          backgroundColor: Colors.white,
-          flexibleSpace: FlexibleSpaceBar(
-            stretchModes: [
-              StretchMode.zoomBackground,
-              StretchMode.blurBackground
-            ],
-            background: Padding(
-              padding: EdgeInsets.fromLTRB(10, 8, 10, 8),
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: TextField(
-                  cursorColor: Colors.black,
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    border: InputBorder.none,
-                    prefixIcon: Icon(Icons.search),
-                  ),
-                ),
+          children: [
+            const CircleAvatar(
+              backgroundImage: NetworkImage(
+                'https://znews-photo.zadn.vn/w660/Uploaded/ofh_huqfztmf/2021_09_30/GetPaidStock.com_6154f2f06abbe_1.jpg',
               ),
             ),
-          ),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return Padding(
-              padding: EdgeInsets.all(10),
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.94,
-                height: 76,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                            width: 60,
-                            height: 60,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 58,
-                                  height: 58,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(2),
-                                    child: Container(
-                                      width: 56,
-                                      height: 56,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: 36,
-                                  left: 10,
-                                  child: Container(
-                                    width: 16,
-                                    height: 16,
-                                    child: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.photo_camera_front),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Text("Tạo Story")
-                        ],
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      ListView.builder(
-                        itemCount: listStory.length,
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: EdgeInsets.only(right: 4),
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        width: 58,
-                                        height: 58,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                                width: 2, color: Colors.blue)),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(2),
-                                          child: Container(
-                                            width: 56,
-                                            height: 56,
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              image: DecorationImage(
-                                                image: AssetImage(listStory[index].url),
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        bottom: 2,
-                                        left: 42,
-                                        child: Container(
-                                          width: 16,
-                                          height: 16,
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                width: 2, color: Colors.white),
-                                            color: Colors.green,
-                                            shape: BoxShape.circle,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Text(listStory[index].name)
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+            const SizedBox(
+              width: 12,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "C.Ronaldo",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            );
-          }, childCount: 1),
+                Text(
+                  "Online",
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )
+              ],
+            )
+          ],
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            return Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, bottom: 12),
-              child: Row(
-                children: [
-                  Container(
-                    width: 54,
-                    height: 54,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(listStory[index].url),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        listStory[index].name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Row(
-                        children: [
-                          Text("Hello"),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text("10:30"),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }, childCount: listStory.length),
-        )
-      ],
-    )
-  */
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Ionicons.chevron_back,
+            color: Colors.indigoAccent,
+            size: 30,
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Ionicons.call,
+              size: 26,
+              color: Colors.indigoAccent,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Ionicons.videocam,
+              size: 30,
+              color: Colors.indigoAccent,
+            ),
+          )
+        ],
+      ),
+      body: Column(
+        children: [Text('Hello')],
+      ),
+    );
+  }
 }

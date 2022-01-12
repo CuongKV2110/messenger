@@ -9,11 +9,15 @@ part of 'login_response.dart';
 LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) =>
     LoginResponse(
       Account.fromJson(json['data'] as Map<String, dynamic>),
-      json['success'] as bool,
-    );
+    )
+      ..success = json['success'] as bool
+      ..errorCode = json['errorCode'] as String
+      ..errorMessage = json['errorMessage'] as String;
 
 Map<String, dynamic> _$LoginResponseToJson(LoginResponse instance) =>
     <String, dynamic>{
-      'data': instance.data,
       'success': instance.success,
+      'errorCode': instance.errorCode,
+      'errorMessage': instance.errorMessage,
+      'data': instance.data,
     };

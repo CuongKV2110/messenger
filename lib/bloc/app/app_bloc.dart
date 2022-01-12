@@ -1,63 +1,43 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:messenger/models/story.dart';
+import 'package:bloc/bloc.dart';
+import 'package:messenger/bloc/app/app_event.dart';
+import 'package:messenger/bloc/app/app_state.dart';
+import 'package:messenger/models/account.dart';
 import 'package:messenger/models/user.dart';
-import 'package:messenger/providers/story_provider.dart';
-import 'package:messenger/providers/user_provider.dart';
-
-import 'app_event.dart';
-import 'app_state.dart';
 
 class AppBloc extends Bloc<AppEvent, AppState> {
-  final UserProvider _userProvider = UserProvider();
-  final StoryProvider _storyProvider = StoryProvider();
-  AppBloc() : super(HomeInitial());
-  String errorHomeage = '';
-  List<User> users = [];
-  List<Story> stories = [];
+  static final AppBloc singleton = AppBloc._internal();
 
-  void dispose(){
-    close();
+  factory AppBloc() => singleton;
+
+  AppBloc._internal() : super(Initial());
+
+  void dispose() {
+    singleton.close();
   }
 
   @override
+  AppState get initialState => Initial();
+
+  String token = '';
+  String deviceId = '';
+  late Account account;
+
+  @override
   Stream<AppState> mapEventToState(AppEvent event) async* {
-    if (event is GetUser) {
-        yield HomeProcessing();
-        // await Future.delayed(const Duration(milliseconds: 1500), () {});
-
-        var res = await _userProvider.getData();
-
-        if (res.success) {
-          users = (res).data;
-          yield HomeSuccess();
-        } else {
-          errorHomeage = 'Get User Error';
-          yield HomeError();
-        }
-    }
-    if (event is GetStory) {
-      yield HomeProcessing();
-      // await Future.delayed(const Duration(milliseconds: 1500), () {});
-
-      var res = await _storyProvider.getData();
-
-      if (res.success) {
-        stories = (res).data;
-        yield HomeSuccess();
+    if (event is TryAuthenticating) {
+      // this.token = await StorageHelper.getToken();
+      this.token = '123123';
+      if (this.token.isEmpty) {
+        yield NotAuthenticated();
       } else {
-        errorHomeage = 'Get Story Error';
-        yield HomeError();
+        yield (Authenticated());
       }
     }
-    if (event is StoryView) {
-      print("ChatView");
-    }
-    if (event is FriendView) {
-      print("ChatView");
-    }
-    if (event is InfoView) {
-      print('Info View');
-      yield HomeSuccess();
+
+    if (event is Logout) {
+      yield Loading();
+      // await StorageHelper.deleteToken();
+      yield NotAuthenticated();
     }
   }
 }

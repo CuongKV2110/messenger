@@ -10,11 +10,15 @@ UserResponse _$UserResponseFromJson(Map<String, dynamic> json) => UserResponse(
       (json['data'] as List<dynamic>)
           .map((e) => User.fromJson(e as Map<String, dynamic>))
           .toList(),
-      json['success'] as bool,
-    );
+    )
+      ..success = json['success'] as bool
+      ..errorCode = json['errorCode'] as String
+      ..errorMessage = json['errorMessage'] as String;
 
 Map<String, dynamic> _$UserResponseToJson(UserResponse instance) =>
     <String, dynamic>{
-      'data': instance.data,
       'success': instance.success,
+      'errorCode': instance.errorCode,
+      'errorMessage': instance.errorMessage,
+      'data': instance.data,
     };

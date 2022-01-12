@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 abstract class AppState {}
 
-class HomeInitial extends AppState {}
+class Initial extends AppState {}
 
-class HomeProcessing extends AppState {}
+class NotAuthenticated extends AppState {}
 
-class HomeSuccess extends AppState {}
+class Authenticated extends AppState {}
 
-class HomeError extends AppState {}
-
-
+class Loading extends AppState {}

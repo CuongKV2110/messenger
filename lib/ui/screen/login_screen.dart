@@ -22,6 +22,18 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    //Get data
+  }
+
+  @override
+  void dispose() {
+    _loginBloc.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener(
@@ -30,7 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
           print(state);
           if (state is LoginProcessing) {
             UiHelper.showLoading(context);
-
           }
           if (state is LoginError) {
             UiHelper.hideLoading(context);
@@ -77,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        _loginForm()
+                        _buildLoginForm()
                       ],
                     ),
                   ),
@@ -90,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _loginForm() {
+  Widget _buildLoginForm() {
     return Column(
       children: [
         Padding(
@@ -130,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         Text(
           _loginBloc.errorMessage,
-          style: TextStyle(color: Colors.red),
+          style: const TextStyle(color: Colors.red),
         ),
         const SizedBox(
           height: 10,

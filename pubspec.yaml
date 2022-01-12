@@ -9,7 +9,7 @@ environment:
 
 dependencies:
   flutter:
-    sdk: flutter
+    sdk: flutter #v2.8.0 - dart 2.15.0
   ionicons: ^0.1.2
 
   cupertino_icons: ^1.0.2
@@ -18,13 +18,17 @@ dependencies:
   dio: ^4.0.4
   flutter_bloc: 7.3.0
   json_serializable: ^6.0.0
-  fluttertoast: 8.0.7
+#  fluttertoast: ^8.0.8
   http: ^0.13.4
   json_annotation: ^4.3.0
+  intl: ^0.17.0
+  timeago: 3.1.0
 
+# flutter packages pub run build_runner build --delete-conflicting-outputs
 dev_dependencies:
   analyzer: ^2.7.0
   build_runner: any
+
   flutter_test:
     sdk: flutter
 
@@ -35,23 +39,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/face.png
-    - images/mess.png
-    - images/user1.jpg
-    - images/user2.jpg
-    - images/user3.jpg
-    - images/user4.jpg
-    - images/user5.jpg
-    - images/user6.jpg
-    - images/user7.jpg
-    - images/user8.jpg
-    - images/user9.jpg
-    - images/user10.jpg
-    - images/user11.jpg
-    - images/user12.jpg
-    - images/user13.jpg
-    - images/avt.jpg
-    - images/gmail1.png
+    - images/
+
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

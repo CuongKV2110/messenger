@@ -18,7 +18,7 @@ class Search extends StatelessWidget {
           StretchMode.blurBackground
         ],
         background: Padding(
-          padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+          padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
           child: Container(
             height: 50,
             decoration: BoxDecoration(

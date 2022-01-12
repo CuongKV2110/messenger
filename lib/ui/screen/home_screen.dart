@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -5,6 +6,7 @@ import 'package:messenger/bloc/app/app_bloc.dart';
 import 'package:messenger/bloc/home/home_bloc.dart';
 import 'package:messenger/bloc/home/home_event.dart';
 import 'package:messenger/bloc/home/home_state.dart';
+import 'package:messenger/ui/screen/profile_screen.dart';
 import 'package:messenger/ui/widget/add_story.dart';
 import 'package:messenger/ui/widget/friend_item.dart';
 import 'package:messenger/ui/widget/mess_item.dart';
@@ -46,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     String title = 'Chats';
     if(_selectedIndex == 0) {
-      title = 'Trò chuyện';
+      title = 'Chats';
     }
 
     if(_selectedIndex == 1) {
@@ -73,10 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.white,
           leading: GestureDetector(
             onTap: () {
-              print('A');
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ProfileScreen();
+                  },
+                ),
+              );
             },
             child: Padding(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(AppBloc.singleton.account.avatarUrl),
               ),
@@ -137,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return SliverList(
       delegate: SliverChildBuilderDelegate((context, index) {
         return Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(14,10,14,8),
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.94,
             height: 80,
@@ -176,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return MessScreen();
+                    return const MessScreen();
                   },
                 ),
               );

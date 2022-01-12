@@ -10,7 +10,7 @@ class FriendItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 2),
+      padding: const EdgeInsets.fromLTRB(14, 12, 14, 2),
       child: Row(
         children: [
           SizedBox(

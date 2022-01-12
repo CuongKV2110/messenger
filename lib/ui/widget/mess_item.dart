@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/models/user.dart';
+
 class MessItem extends StatelessWidget {
   User user;
 
@@ -8,7 +9,7 @@ class MessItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 12),
+      padding: const EdgeInsets.fromLTRB(14, 5, 14, 12),
       child: Row(
         children: [
           Container(

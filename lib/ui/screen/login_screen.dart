@@ -120,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: TextField(
             obscureText: true,
             controller: passController,
+            keyboardType: TextInputType.text,
             decoration: const InputDecoration(
               hintText: "Password",
             ),

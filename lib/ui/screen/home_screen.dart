@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
@@ -12,6 +11,7 @@ import 'package:messenger/ui/widget/friend_item.dart';
 import 'package:messenger/ui/widget/mess_item.dart';
 import 'package:messenger/ui/widget/search.dart';
 import 'package:messenger/ui/widget/stories_item.dart';
+import 'package:messenger/ui/widget/stories_item2.dart';
 
 import 'mess_screen.dart';
 
@@ -95,7 +95,12 @@ class _HomeScreenState extends State<HomeScreen> {
         body: BlocBuilder(
           bloc: _homeBloc,
           builder: (context, state) {
-            return _buildBody();
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
+              },
+              child: _buildBody(),
+            );
           },
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -207,30 +212,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildStory() {
-    return ListView.builder(
-      itemCount: _homeBloc.stories.length,
-      itemBuilder: (context, index) {
-        return CachedNetworkImage(
-          height: 100,
-          width: 100,
-          imageUrl: _homeBloc.stories[index].avt,
-          placeholder: (context, url) {
-            return Container(
-              color: Colors.black,
-            );
-          },
-          errorWidget: (context, url, error) {
-            return Container(
-              color: Colors.black,
-              child: const Icon(
-                Icons.error,
-                color: Colors.red,
-              ),
-            );
-          },
-        );
-        // return Text(_homeBloc.stories[index].name);
-      },
+    return Padding(
+      padding: EdgeInsets.all(4),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 10,
+          //crossAxisSpacing: 10,
+        ),
+        itemBuilder: (context, index) {
+          return StoriesItem2(_homeBloc.stories[index]);
+        },
+        itemCount: _homeBloc.stories.length,
+      ),
     );
   }
 }

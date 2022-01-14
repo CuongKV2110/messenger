@@ -10,8 +10,13 @@ class FriendScreen extends StatefulWidget {
 class _FriendScreenState extends State<FriendScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Text("A"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tìm Kiếm'),
+      ),
+      body: Center(
+        child: Text('A'),
+      ),
     );
   }
 }

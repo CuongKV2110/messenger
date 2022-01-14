@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/ui/screen/friend_screen.dart';
 
 class Search extends StatelessWidget {
   const Search({Key? key}) : super(key: key);
@@ -25,12 +26,24 @@ class Search extends StatelessWidget {
               color: Colors.grey,
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const TextField(
-              cursorColor: Colors.black,
-              decoration: InputDecoration(
-                hintText: "Tìm kiếm",
-                border: InputBorder.none,
-                prefixIcon: Icon(Icons.search),
+            child: GestureDetector(
+              onDoubleTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const FriendScreen();
+                    },
+                  ),
+                );
+              },
+              child: const TextField(
+                keyboardType: TextInputType.none,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                  hintText: "Tìm kiếm",
+                  border: InputBorder.none,
+                  prefixIcon: Icon(Icons.search),
+                ),
               ),
             ),
           ),

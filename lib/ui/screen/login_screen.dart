@@ -140,6 +140,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 userController.text.trim(), passController.text.trim()));
           },
         ),
+        const SizedBox(
+          height: 10,
+        ),
         Text(
           _loginBloc.errorMessage,
           style: const TextStyle(color: Colors.red),

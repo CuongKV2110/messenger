@@ -10,12 +10,13 @@ class Story{
     String avt;
     String name;
     String fullname;
+    int friend;
     String str;
     String music;
     int time;
 
 
-    Story(this.id, this.status, this.avt, this.name, this.fullname, this.str,
+    Story(this.id, this.status, this.avt, this.name, this.fullname,this.friend, this.str,
       this.music, this.time);
 
     factory Story.fromJson(Map<String, dynamic> json) => _$StoryFromJson(json);

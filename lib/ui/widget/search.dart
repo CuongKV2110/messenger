@@ -36,6 +36,7 @@ class Search extends StatelessWidget {
                   ),
                 );
               },
+
               child: const TextField(
                 keyboardType: TextInputType.none,
                 cursorColor: Colors.black,

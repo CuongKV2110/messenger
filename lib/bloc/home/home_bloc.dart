@@ -24,12 +24,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         yield HomeProcessing();
         // await Future.delayed(const Duration(milliseconds: 1500), () {});
 
-        var res_user = await _userProvider.getData();
-        var res_str = await _storyProvider.getData();
+        var resUser = await _userProvider.getData();
+        var resStr = await _storyProvider.getData();
 
-        if (res_user.success & res_str.success) {
-          users = (res_user).data;
-          stories = (res_str).data;
+        if (resUser.success & resStr.success) {
+          users = (resUser).data;
+          stories = (resStr).data;
           yield HomeSuccess();
         } else {
           errorHomeage = 'Get User Error';

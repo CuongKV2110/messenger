@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/models/story.dart';
-import 'package:messenger/ui/screen/friend_screen.dart';
 import 'package:messenger/ui/screen/story_detail.dart';
 
 class StoriesItem2 extends StatelessWidget {

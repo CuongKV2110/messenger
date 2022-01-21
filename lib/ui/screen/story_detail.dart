@@ -9,6 +9,7 @@ class StoryDetail extends StatelessWidget {
 
   StoryDetail(this.story);
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,30 +129,36 @@ class StoryDetail extends StatelessWidget {
                   )
                 : const SizedBox(),
             Positioned(
-                top: 12,
-                right: 14,
-                child: Row(
-                  children: [
-                    const Icon(
+              top: 12,
+              right: 14,
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      print('a');
+                    },
+                    child: const Icon(
                       Ionicons.ellipsis_horizontal,
                       size: 24,
                       color: Colors.white,
                     ),
-                    const SizedBox(
-                      width: 8,
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Icon(
+                      Ionicons.close,
+                      size: 34,
+                      color: Colors.white,
                     ),
-                    GestureDetector(
-                      onTap: (){
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Ionicons.close,
-                        size: 34,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
-                ))
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:messenger/bloc/app/app_bloc.dart';
 import 'package:messenger/bloc/home/home_bloc.dart';
 import 'package:messenger/bloc/home/home_event.dart';
-import 'package:messenger/bloc/home/home_state.dart';
 import 'package:messenger/ui/screen/profile_screen.dart';
 import 'package:messenger/ui/widget/add_story.dart';
 import 'package:messenger/ui/widget/friend_item.dart';
@@ -60,9 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return BlocListener(
-      listener: (context, state) {
-        if (state is HomeSuccess) {
-          print("Mess Success");
+      listener: (context, event) {
+        if (event is GetData) {
+          print("Loading");
         }
       },
       bloc: _homeBloc,
@@ -84,10 +84,27 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: CircleAvatar(
-                backgroundImage:
-                    NetworkImage(AppBloc.singleton.account.avatarUrl),
+              padding: const EdgeInsets.all(10),
+              child: CachedNetworkImage(
+                imageUrl: AppBloc.singleton.account.avatarUrl,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) {
+                  return Container(
+                    color: Colors.black,
+                    child: const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -213,7 +230,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildStory() {
     return Padding(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,

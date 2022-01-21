@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:messenger/bloc/app/app_bloc.dart';
@@ -23,10 +24,28 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(
                         height: 30,
                       ),
-                      CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(AppBloc.singleton.account.avatarUrl),
-                        radius: 40,
+                      CachedNetworkImage(
+                        imageUrl: AppBloc.singleton.account.avatarUrl,
+                        imageBuilder: (context, imageProvider) => Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        errorWidget: (context, url, error) {
+                          return Container(
+                            color: Colors.black,
+                            child: const Icon(
+                              Icons.error,
+                              color: Colors.red,
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(
                         height: 8,

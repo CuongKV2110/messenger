@@ -24,7 +24,7 @@ class Search extends StatelessWidget {
             height: 50,
             decoration: BoxDecoration(
               color: Colors.grey,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: GestureDetector(
               onDoubleTap: () {

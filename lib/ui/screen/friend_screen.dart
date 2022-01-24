@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:messenger/bloc/home/home_bloc.dart';
 import 'package:messenger/bloc/home/home_event.dart';
 import 'package:messenger/models/story.dart';
+import 'package:messenger/ui/widget/search_item.dart';
 
 class FriendScreen extends StatefulWidget {
   const FriendScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class FriendScreen extends StatefulWidget {
 class _FriendScreenState extends State<FriendScreen> {
   final HomeBloc _homeBloc = HomeBloc();
   List<Story> list = [];
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +60,9 @@ class _FriendScreenState extends State<FriendScreen> {
               child: SafeArea(
                   child: Column(
                 children: [
-                  const SizedBox(height: 6,),
+                  const SizedBox(
+                    height: 6,
+                  ),
                   _buildSearchBar(),
                   _buildListFriend(),
                 ],
@@ -116,194 +120,11 @@ class _FriendScreenState extends State<FriendScreen> {
     return Expanded(
       child: list.isNotEmpty
           ? ListView.builder(
-        itemCount: list.length,
+          itemCount: list.length,
           itemBuilder: (context, index) {
-              return Card(
-                elevation: 0,
-                borderOnForeground: false,
-                key: ValueKey(list[index].fullname),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: 64,
-                            height: 64,
-                            child: Stack(
-                              children: [
-                                CachedNetworkImage(
-                                  imageUrl: list[index].avt,
-                                  imageBuilder: (context, imageProvider) => Container(
-                                    width: 52,
-                                    height: 52,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  errorWidget: (context, url, error) {
-                                    return Container(
-                                      color: Colors.black,
-                                      child: const Icon(
-                                        Icons.error,
-                                        color: Colors.red,
-                                      ),
-                                    );
-                                  },
-                                ),
-                                list[index].status == 'online'
-                                    ? Positioned(
-                                  bottom: 10,
-                                  left: 38,
-                                  child: Container(
-                                    width: 16,
-                                    height: 16,
-                                    decoration: BoxDecoration(
-                                      border:
-                                      Border.all(width: 2, color: Colors.white),
-                                      color: Colors.green,
-                                      shape: BoxShape.circle,
-                                    ),
-                                  ),
-                                )
-                                    : const SizedBox()
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Container(
-                        height: 62,
-                        width: MediaQuery.of(context).size.width*0.72,
-                        decoration: const BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(),
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              list[index].fullname,
-                              style: const TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(list[index].friend.toString() + ' bạn chung'),
-                          ],
-                        ),
-                      ),
-
-                    ],
-                  ),
-                ),
-              );
-            })
-          : Text(''),
+            return SearchItem(list[index]);
+          })
+          : const Text('Không tìm thấy người dùng'),
     );
-    /*return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (context, index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    SizedBox(
-                      width: 64,
-                      height: 64,
-                      child: Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: _homeBloc.stories[index].avt,
-                            imageBuilder: (context, imageProvider) => Container(
-                              width: 52,
-                              height: 52,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) {
-                              return Container(
-                                color: Colors.black,
-                                child: const Icon(
-                                  Icons.error,
-                                  color: Colors.red,
-                                ),
-                              );
-                            },
-                          ),
-                          _homeBloc.stories[index].status == 'online'
-                              ? Positioned(
-                            bottom: 10,
-                            left: 38,
-                            child: Container(
-                              width: 16,
-                              height: 16,
-                              decoration: BoxDecoration(
-                                border:
-                                Border.all(width: 2, color: Colors.white),
-                                color: Colors.green,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                          )
-                              : const SizedBox()
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
-                const SizedBox(
-                  width: 6,
-                ),
-                Container(
-                  height: 62,
-                  width: MediaQuery.of(context).size.width*0.72,
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        _homeBloc.stories[index].fullname,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(_homeBloc.stories[index].friend.toString() + ' bạn chung'),
-                    ],
-                  ),
-                ),
-
-              ],
-            ),
-          );
-        },
-        childCount: _homeBloc.stories.length,
-      ),
-    );*/
   }
 }

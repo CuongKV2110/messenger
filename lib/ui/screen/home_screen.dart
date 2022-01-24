@@ -5,7 +5,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:messenger/bloc/app/app_bloc.dart';
 import 'package:messenger/bloc/home/home_bloc.dart';
 import 'package:messenger/bloc/home/home_event.dart';
-import 'package:messenger/ui/screen/profile_screen.dart';
+import 'package:messenger/ui/screen/menu_screen.dart';
 import 'package:messenger/ui/widget/add_story.dart';
 import 'package:messenger/ui/widget/friend_item.dart';
 import 'package:messenger/ui/widget/mess_item.dart';
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    return const ProfileScreen();
+                    return const MenuScreen();
                   },
                 ),
               );
